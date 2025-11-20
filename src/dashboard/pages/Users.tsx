@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import {
-  Table, TextInput, Select, Group, Badge, Textarea,ActionIcon,
-Paper,Text,Modal,Button,
-Title,} from "@mantine/core";
-import {
-  IconEye,
-     IconMail,
-  IconTrash,
-  IconSearch,
-} from "@tabler/icons-react";
+  Table,
+  TextInput,
+  Select,
+  Group,
+  Badge,
+  Textarea,
+  ActionIcon,
+  Paper,
+  Text,
+  Modal,
+  Button,
+  Title,
+} from "@mantine/core";
+import { IconEye, IconMail, IconTrash, IconSearch } from "@tabler/icons-react";
 
 interface User {
   name: string;
@@ -57,11 +62,11 @@ const initialUsers: User[] = [
 const UsersTable: React.FC = () => {
   const [users, setUsers] = useState(initialUsers);
 
-    const [search, setSearch] = useState("");
-const [roleFilter, setRoleFilter] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [roleFilter, setRoleFilter] = useState<string | null>(null);
 
   const [viewUser, setViewUser] = useState<User | null>(null);
-    const [messageUser, setMessageUser] = useState<User | null>(null);
+  const [messageUser, setMessageUser] = useState<User | null>(null);
   const [deleteUser, setDeleteUser] = useState<User | null>(null);
 
   const filteredUsers = users.filter((user) => {
@@ -81,18 +86,15 @@ const [roleFilter, setRoleFilter] = useState<string | null>(null);
 
   return (
     <>
-    <Title order={2}>User Management
-</Title>
-    
-          <Text c="dimmed" mb="lg">
-                    Manage platform users and their roles
+      <Title order={2}>User Management</Title>
 
-
-          </Text>
+      <Text c="dimmed" mb="lg">
+        Manage platform users and their roles
+      </Text>
       <Modal
         opened={!!viewUser}
-          onClose={() => setViewUser(null)}
-    title="User Details"
+        onClose={() => setViewUser(null)}
+        title="User Details"
         centered
       >
         {viewUser && (
@@ -100,50 +102,51 @@ const [roleFilter, setRoleFilter] = useState<string | null>(null);
             <Text fw={600} mb="xs">
               {viewUser.name}
             </Text>
-            <Text>Email:
-                 {viewUser.email}</Text>
-        <Text>Role: {viewUser.role}</Text>
-             <Text>Join Date: {viewUser.joinDate}</Text>
-     <Text>Status: {viewUser.status}</Text>
+            <Text>
+              Email:
+              {viewUser.email}
+            </Text>
+            <Text>Role: {viewUser.role}</Text>
+            <Text>Join Date: {viewUser.joinDate}</Text>
+            <Text>Status: {viewUser.status}</Text>
             <Text>Verifications: {viewUser.verifications}</Text>
           </>
         )}
       </Modal>
 
-      
       <Modal
-  opened={!!messageUser}
-  onClose={() => setMessageUser(null)}
-  title={`Send Message to ${messageUser?.name}`}
-  centered
->
-  {messageUser && (
-    <>
-      <Textarea
-     placeholder="Type your message..."
- mb="sm"
-        autosize
-        minRows={3}
-      />
-          <Button fullWidth color="green" onClick={() => setMessageUser(null)}>
-        Send Message
-      </Button>
-    </>
+        opened={!!messageUser}
+        onClose={() => setMessageUser(null)}
+        title={`Send Message to ${messageUser?.name}`}
+        centered
+      >
+        {messageUser && (
+          <>
+            <Textarea
+              placeholder="Type your message..."
+              mb="sm"
+              autosize
+              minRows={3}
+            />
+            <Button
+              fullWidth
+              color="green"
+              onClick={() => setMessageUser(null)}
+            >
+              Send Message
+            </Button>
+          </>
+        )}
+      </Modal>
 
-  ) 
-     }
-</Modal>
-
-      
       <Modal
         opened={!!deleteUser}
         onClose={() => setDeleteUser(null)}
-      title="Confirm Delete"
+        title="Confirm Delete"
         centered
       >
         <Text mb="md">
-          Are you sure you want to delete{" "}
-          <strong>{deleteUser?.name}</strong>?
+          Are you sure you want to delete <strong>{deleteUser?.name}</strong>?
         </Text>
         <Group justify="flex-end">
           <Button variant="default" onClick={() => setDeleteUser(null)}>
@@ -151,32 +154,28 @@ const [roleFilter, setRoleFilter] = useState<string | null>(null);
           </Button>
           <Button c="red" onClick={handleDelete}>
             Delete
-
-
           </Button>
         </Group>
       </Modal>
 
-    <Paper shadow="xs" p="md" radius="md" withBorder>
-          <Group justify="space-between" mb="md">
-         <TextInput
-  placeholder="Search by name or email..."
+      <Paper shadow="xs" p="md" radius="md" withBorder>
+        <Group justify="space-between" mb="md">
+          <TextInput
+            placeholder="Search by name or email..."
             leftSection={<IconSearch size={16} />}
             value={search}
-           
             onChange={(e) => setSearch(e.currentTarget.value)}
-   radius="md"
-           
+            radius="md"
             style={{ flex: 1, maxWidth: 400 }}
           />
 
           <Select
             placeholder="All Roles"
-
             data={["Seller", "Investor"]}
             value={roleFilter}
             onChange={setRoleFilter}
-            clearable radius="md"
+            clearable
+            radius="md"
             style={{ maxWidth: 150 }}
           />
         </Group>
@@ -191,10 +190,9 @@ const [roleFilter, setRoleFilter] = useState<string | null>(null);
             <Table.Tr>
               <Table.Th>Name</Table.Th>
               <Table.Th>Email</Table.Th>
-              <Table.Th>
-                Role</Table.Th>
-        <Table.Th>Join Date</Table.Th>
-                                 <Table.Th>Status</Table.Th>
+              <Table.Th>Role</Table.Th>
+              <Table.Th>Join Date</Table.Th>
+              <Table.Th>Status</Table.Th>
               <Table.Th>Verifications</Table.Th>
               <Table.Th>Actions</Table.Th>
             </Table.Tr>
@@ -204,11 +202,10 @@ const [roleFilter, setRoleFilter] = useState<string | null>(null);
             {filteredUsers.map((user, i) => (
               <Table.Tr key={i}>
                 <Table.Td fw={500}>{user.name}</Table.Td>
-          <Table.Td>{user.email}</Table.Td>
+                <Table.Td>{user.email}</Table.Td>
                 <Table.Td>{user.role}</Table.Td>
                 <Table.Td>{user.joinDate}</Table.Td>
-               
-               
+
                 <Table.Td>
                   <Badge
                     color={user.status === "Active" ? "green" : "yellow"}
@@ -217,10 +214,9 @@ const [roleFilter, setRoleFilter] = useState<string | null>(null);
                     {user.status}
                   </Badge>
                 </Table.Td>
+                <Table.Td>{user.verifications}</Table.Td>
                 <Table.Td>
-                  {user.verifications}</Table.Td>
-                <Table.Td>
-          <Group gap="xs">
+                  <Group gap="xs">
                     <ActionIcon
                       variant="subtle"
                       color="green"
@@ -228,23 +224,22 @@ const [roleFilter, setRoleFilter] = useState<string | null>(null);
                     >
                       <IconEye size={16} />
                     </ActionIcon>
-      <ActionIcon
-                variant="subtle"
-                 color="blue"
-                     
-                 onClick={() => setMessageUser(user)}
+                    <ActionIcon
+                      variant="subtle"
+                      color="blue"
+                      onClick={() => setMessageUser(user)}
                     >
                       <IconMail size={16} />
                     </ActionIcon>
 
-              <ActionIcon
-           variant="subtle"
+                    <ActionIcon
+                      variant="subtle"
                       color="red"
                       onClick={() => setDeleteUser(user)}
                     >
                       <IconTrash size={16} />
                     </ActionIcon>
-            </Group>
+                  </Group>
                 </Table.Td>
               </Table.Tr>
             ))}

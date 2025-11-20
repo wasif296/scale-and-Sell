@@ -1,4 +1,6 @@
-import { type ReactNode, useMemo, useState } from "react";
+// src/SellerDashboard/layout/SellerDashboardLayout.tsx
+import React, { useMemo, useState } from "react";
+import type { ReactNode } from "react";
 import {
   AppShell,
   Stack,
@@ -27,29 +29,26 @@ type MenuItem = {
 };
 
 const navigation: MenuItem[] = [
+  { label: "Dashboard", icon: <IconDashboard size={16} />, path: "/seller" },
   {
-    label: "Dashboard",
-    icon: <IconDashboard size={16} />,
-    path: "/investor-dashboard/dashboard",
-  },
-  {
-    label: "Explore",
-    icon: <IconSearch size={16} />,
-    path: "/investor-dashboard/explore",
+    label: "My Listings",
+    icon: <IconBriefcase size={16} />,
+    path: "/seller/mylistings",
   },
   {
     label: "Messages",
     icon: <IconMessage size={16} />,
-    path: "/investor-dashboard/messages",
+    path: "/seller/messages",
   },
+  { label: "Escrow", icon: <IconSearch size={16} />, path: "/seller/escrow" },
   {
-    label: "Portfolio",
-    icon: <IconBriefcase size={16} />,
-    path: "/investor-dashboard/portfolio",
+    label: "Contracts",
+    icon: <IconBell size={16} />,
+    path: "/seller/contracts",
   },
 ];
 
-export default function DashboardLayout() {
+export default function SellerDashboardLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const [opened, setOpened] = useState(false);
@@ -75,14 +74,12 @@ export default function DashboardLayout() {
         collapsed: { mobile: !opened },
       }}
       padding="md"
-      styles={{
-        main: { backgroundColor: "#f8f9fa" },
-      }}
+      styles={{ main: { backgroundColor: "#f8f9fa" } }}
     >
       <AppShell.Navbar
         p="md"
         style={{
-          backgroundColor: "#006400",
+          backgroundColor: "#004d00",
           color: "white",
           display: "flex",
           flexDirection: "column",
@@ -90,7 +87,7 @@ export default function DashboardLayout() {
       >
         <Stack gap="xs" style={{ flexGrow: 1, marginTop: "20px" }}>
           {filteredNavigation.map((item) => {
-            const isActive = location.pathname.startsWith(item.path);
+            const isActive = location.pathname === item.path;
             return (
               <NavLink
                 key={item.label}
@@ -113,15 +110,12 @@ export default function DashboardLayout() {
                 active={isActive}
                 styles={{
                   root: {
-                    color: isActive ? "#006400" : "#fff",
+                    color: isActive ? "#004d00" : "#fff",
                     backgroundColor: isActive ? "#fff" : "transparent",
                     borderRadius: "8px",
                     fontWeight: isActive ? 700 : 500,
                     transition: "background-color 0.2s ease, color 0.2s ease",
-                    "&:hover": {
-                      backgroundColor: "#ffffff",
-                      color: "#006400",
-                    },
+                    "&:hover": { backgroundColor: "#ffffff", color: "#004d00" },
                   },
                   label: { fontSize: "14px", fontWeight: 600 },
                 }}
@@ -142,10 +136,7 @@ export default function DashboardLayout() {
               backgroundColor: "transparent",
               color: "white",
               fontWeight: 600,
-              "&:hover": {
-                backgroundColor: "#ffffff",
-                color: "#d32f2f",
-              },
+              "&:hover": { backgroundColor: "#ffffff", color: "#d32f2f" },
             },
           }}
         >

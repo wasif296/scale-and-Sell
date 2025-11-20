@@ -1,16 +1,24 @@
 import React from "react";
-
-import InvestorDashboardLayout from "../layout/investorDashboardLayout";
-import investorDashboard from "../pages/investorDashboard";
 import type { RouteObject } from "react-router-dom";
+
+// Layout
+import InvestorDashboardLayout from "../layout/investorDashboardLayout";
+import InvestorDashboard from "../pages/investorDashboard";
+import Explore from "../pages/Explore";
+import Messages from "../pages/Messages";
+import Portfolio from "../pages/Portfolio";
+
+// Pages
 
 const investorDashboardRouter: RouteObject[] = [
   {
     path: "/investor-dashboard",
     element: <InvestorDashboardLayout />,
     children: [
-      { path: "dashboard", element: <investorDashboard /> },
-      
+      { path: "dashboard", element: <InvestorDashboard /> },
+      { path: "explore", element: <Explore /> },
+      { path: "messages", element: <Messages /> },
+      { path: "portfolio", element: <Portfolio /> },
     ],
   },
 ];

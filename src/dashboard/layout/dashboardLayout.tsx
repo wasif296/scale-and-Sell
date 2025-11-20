@@ -17,7 +17,6 @@ import {
   IconUsers,
   IconWallet,
   IconBell,
-  IconSun,
   IconLogout,
 } from "@tabler/icons-react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -141,7 +140,6 @@ export default function DashboardLayout() {
         </Button>
       </AppShell.Navbar>
 
-      
       <AppShell.Header
         style={{
           backgroundColor: "#fff",
@@ -165,14 +163,12 @@ export default function DashboardLayout() {
         </Group>
 
         <Group gap="xs">
-          
           <ActionIcon variant="subtle" color="green">
             <IconBell size={18} />
           </ActionIcon>
         </Group>
       </AppShell.Header>
 
-      {/* MAIN CONTENT */}
       <AppShell.Main>
         <Outlet />
       </AppShell.Main>

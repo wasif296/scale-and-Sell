@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import {Table,TextInput,Select,Group,Badge,Paper,Button,Text,Title} from "@mantine/core";
-import {  IconSearch,
-   IconClock,
-    IconCheck,
-  IconX,
-} from "@tabler/icons-react";
+import {
+  Table,
+  TextInput,
+  Select,
+  Group,
+  Badge,
+  Paper,
+  Button,
+  Text,
+  Title,
+} from "@mantine/core";
+import { IconSearch, IconClock, IconCheck, IconX } from "@tabler/icons-react";
 
 interface Listing {
   title: string;
@@ -53,10 +59,9 @@ const initialListings: Listing[] = [
 const ListingsPage: React.FC = () => {
   const [listings, setListings] = useState(initialListings);
 
-
   const [search, setSearch] = useState("");
 
-    const [statusFilter, setStatusFilter] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
   const filteredListings = listings.filter((listing) => {
     const matchesSearch = listing.title
@@ -77,7 +82,6 @@ const ListingsPage: React.FC = () => {
   const handleReject = (title: string) => {
     setListings((prev) =>
       prev.map((listing) =>
-
         listing.title === title ? { ...listing, status: "Rejected" } : listing
       )
     );
@@ -85,25 +89,20 @@ const ListingsPage: React.FC = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <Title >
-        Listing Management
-      </Title>
-<Text c="dimmed" mb="md">
+      <Title>Listing Management</Title>
+      <Text c="dimmed" mb="md">
         Review and approve business listings
       </Text>
 
-    <Group mb="md" justify="space-between">
+      <Group mb="md" justify="space-between">
         <TextInput
-        
-        placeholder="Search listings..."
+          placeholder="Search listings..."
           leftSection={<IconSearch size={16} />}
-        
-  value={search}
+          value={search}
           onChange={(e) => setSearch(e.currentTarget.value)}
-                radius="md"
+          radius="md"
           style={{ flex: 1, maxWidth: 400 }}
         />
-
 
         <Select
           placeholder="All Status"
@@ -111,8 +110,7 @@ const ListingsPage: React.FC = () => {
           value={statusFilter}
           onChange={setStatusFilter}
           clearable
-        
-      radius="md"
+          radius="md"
           style={{ maxWidth: 150 }}
         />
       </Group>
@@ -120,17 +118,13 @@ const ListingsPage: React.FC = () => {
       <Paper shadow="xs" p="md" radius="md" withBorder>
         <Table highlightOnHover withTableBorder verticalSpacing="sm">
           <Table.Thead>
-
-
             <Table.Tr>
-
               <Table.Th>Title</Table.Th>
               <Table.Th>Seller</Table.Th>
               <Table.Th>Price</Table.Th>
               <Table.Th>Location</Table.Th>
               <Table.Th>Status</Table.Th>
-              <Table.Th>
-                Submitted</Table.Th>
+              <Table.Th>Submitted</Table.Th>
               <Table.Th>Actions</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -139,26 +133,24 @@ const ListingsPage: React.FC = () => {
             {filteredListings.map((listing, i) => (
               <Table.Tr key={i}>
                 <Table.Td fw={500}>{listing.title}</Table.Td>
-             <Table.Td>
-                {listing.seller}</Table.Td>
+                <Table.Td>{listing.seller}</Table.Td>
                 <Table.Td c="green" fw={600}>
                   {listing.price}
-
-        </Table.Td>
+                </Table.Td>
                 <Table.Td>{listing.location}</Table.Td>
                 <Table.Td>
                   <Group gap={4}>
                     {listing.status === "Pending" && (
                       <>
                         <IconClock size={16} color="gold" />
-                  <Badge color="yellow" variant="light">
+                        <Badge color="yellow" variant="light">
                           Pending
                         </Badge>
                       </>
                     )}
                     {listing.status === "Approved" && (
                       <>
-           <IconCheck size={16} color="green" />
+                        <IconCheck size={16} color="green" />
                         <Badge color="green" variant="light">
                           Approved
                         </Badge>
@@ -173,9 +165,9 @@ const ListingsPage: React.FC = () => {
                       </>
                     )}
                   </Group>
-                   </Table.Td>
+                </Table.Td>
                 <Table.Td>{listing.submitted}</Table.Td>
-    <Table.Td>
+                <Table.Td>
                   {listing.status === "Pending" && (
                     <Group gap="xs">
                       <Button
@@ -187,14 +179,14 @@ const ListingsPage: React.FC = () => {
                         Approve
                       </Button>
                       <Button
-                             color="red"
+                        color="red"
                         size="xs"
-                            variant="outline"
+                        variant="outline"
                         radius="md"
                         onClick={() => handleReject(listing.title)}
                       >
                         Reject
-      </Button>
+                      </Button>
                     </Group>
                   )}
 
@@ -208,14 +200,10 @@ const ListingsPage: React.FC = () => {
                     <Button size="xs" color="gray" disabled>
                       Rejected
                     </Button>
-                  )
-                }
+                  )}
                 </Table.Td>
               </Table.Tr>
-           
-           )
-    )
-}
+            ))}
           </Table.Tbody>
         </Table>
       </Paper>

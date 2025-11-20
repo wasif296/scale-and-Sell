@@ -8,7 +8,6 @@ import Systemlogs from "../pages/Systemlogs";
 import DashboardLayout from "../layout/dashboardLayout";
 import LandingPage from "../../auth/pages/LandingPage";
 
-
 const routes: RouteObject[] = [
   {
     path: "/",

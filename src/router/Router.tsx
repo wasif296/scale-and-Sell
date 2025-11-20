@@ -1,3 +1,4 @@
+// src/router/Router.tsx
 import React from "react";
 import {
   createBrowserRouter,
@@ -6,14 +7,16 @@ import {
 
 import authRouter from "../auth/route/authRouter";
 import dashboardRouter from "../dashboard/route/dashboardRouter";
-import investorDashboardRouter from "../InvestorDashboard/route/investorDashboardRouter";
+import InvestorDashboardRouter from "../InvestorDashboard/route/InvestorDashboardRouter";
+import SellerDashboardRouter from "../SellerDashboard/route/sellerDashboardRouter";
+// import SellerDashboardRouter from "../SellerDashboard/route/SellerDashboardRouter";
 
 const router = createBrowserRouter([
   ...authRouter,
   ...dashboardRouter,
-  ...investorDashboardRouter,
-]
-  );
+  ...InvestorDashboardRouter,
+  ...SellerDashboardRouter,
+]);
 
 const RouterProvider: React.FC = () => {
   return <ReactRouterProvider router={router} />;

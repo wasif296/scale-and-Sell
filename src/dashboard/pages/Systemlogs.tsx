@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { Card, Table, Text, Stack, Title, Badge, TextInput,
+import {
+  Card,
+  Table,
+  Text,
+  Stack,
+  Title,
+  Badge,
+  TextInput,
 } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 
 type LogItem = {
   timestamp: string;
-
 
   action: string;
   user: string;
@@ -14,7 +20,7 @@ type LogItem = {
 };
 
 export default function SystemLogs() {
-       const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
   const logs: LogItem[] = [
     {
@@ -25,21 +31,19 @@ export default function SystemLogs() {
       details: "E-commerce Platform listing approved",
     },
 
-
     {
       timestamp: "2025-01-22 14:25:12",
       action: "User Registration",
       user: "System",
-   status: "Success",
+      status: "Success",
       details: "New investor registered: Ahmed Khan",
     },
 
-
-        {
+    {
       timestamp: "2025-01-22 14:20:30",
-  action: "Escrow Release",
+      action: "Escrow Release",
       user: "Admin",
-       status: "Success",
+      status: "Success",
       details: "Transaction #123 released successfully",
     },
     {
@@ -49,7 +53,6 @@ export default function SystemLogs() {
       status: "Warning",
       details: "Multiple failed attempts from IP 192.168.1.1",
     },
-
 
     {
       timestamp: "2025-01-22 14:10:22",
@@ -62,20 +65,32 @@ export default function SystemLogs() {
 
   const filteredLogs = logs.filter(
     (log) =>
-       log.action.toLowerCase().includes(search.toLowerCase()) ||
-    log.user.toLowerCase().includes(search.toLowerCase()) ||
-        log.details.toLowerCase().includes(search.toLowerCase()) ||
-       log.status.toLowerCase().includes(search.toLowerCase())
+      log.action.toLowerCase().includes(search.toLowerCase()) ||
+      log.user.toLowerCase().includes(search.toLowerCase()) ||
+      log.details.toLowerCase().includes(search.toLowerCase()) ||
+      log.status.toLowerCase().includes(search.toLowerCase())
   );
 
   const getStatusBadge = (status: LogItem["status"]) => {
     switch (status) {
       case "Success":
-        return <Badge color="green" variant="light">Success</Badge>;
+        return (
+          <Badge color="green" variant="light">
+            Success
+          </Badge>
+        );
       case "Warning":
-        return <Badge color="yellow" variant="light">Warning</Badge>;
+        return (
+          <Badge color="yellow" variant="light">
+            Warning
+          </Badge>
+        );
       case "Error":
-        return <Badge color="red" variant="light">Error</Badge>;
+        return (
+          <Badge color="red" variant="light">
+            Error
+          </Badge>
+        );
       default:
         return <Badge color="gray">{status}</Badge>;
     }
@@ -84,18 +99,13 @@ export default function SystemLogs() {
   const rows = filteredLogs.map((log) => (
     <Table.Tr key={log.timestamp + log.action}>
       <Table.Td>{log.timestamp}</Table.Td>
-   <Table.Td>
-        {log.action}</Table.Td>
-    <Table.Td>
-      {log.user}</Table.Td>
+      <Table.Td>{log.action}</Table.Td>
+      <Table.Td>{log.user}</Table.Td>
       <Table.Td>{getStatusBadge(log.status)}</Table.Td>
 
       <Table.Td>{log.details}</Table.Td>
-
     </Table.Tr>
-
-  ) 
-      );
+  ));
 
   return (
     <Stack p="xl" bg="#f7fdf7" style={{ minHeight: "100vh" }}>
@@ -111,11 +121,9 @@ export default function SystemLogs() {
         leftSection={<IconSearch size={16} />}
         value={search}
         onChange={(e) => setSearch(e.currentTarget.value)}
-     radius="md"
+        radius="md"
         size="md"
         mt="sm"
-
-
         style={{ maxWidth: 400 }}
       />
 
@@ -128,17 +136,11 @@ export default function SystemLogs() {
               <Table.Th>User</Table.Th>
               <Table.Th>Status</Table.Th>
               <Table.Th>Details</Table.Th>
-
             </Table.Tr>
-
-
-    </Table.Thead>
+          </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>
         </Table>
-
-
- </Card>
-      </Stack>
+      </Card>
+    </Stack>
   );
-  
 }
